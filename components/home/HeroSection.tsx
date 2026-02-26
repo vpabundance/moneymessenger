@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import LineAnimation from "./LineAnimation";
+import TunnelAnimation from "./TunnelAnimation";
 import StatsTicker from "./StatsTicker";
 
 export default function HeroSection() {
@@ -14,18 +14,8 @@ export default function HeroSection() {
           "linear-gradient(135deg, #fff0f0 0%, #ffc8c8 25%, #ffe0e0 55%, #fff8f8 100%)",
       }}
     >
-      {/* The line animation — masked to reveal naturally on the right */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          maskImage:
-            "linear-gradient(to left, black 20%, rgba(0,0,0,0.55) 52%, transparent 80%)",
-          WebkitMaskImage:
-            "linear-gradient(to left, black 20%, rgba(0,0,0,0.55) 52%, transparent 80%)",
-        }}
-      >
-        <LineAnimation />
-      </div>
+      {/* Tunnel animation — WebGL, fades toward text on left */}
+      <TunnelAnimation />
 
       {/* Radial warm glow behind focal point */}
       <div

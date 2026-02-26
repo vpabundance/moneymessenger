@@ -44,7 +44,7 @@ export default function ThesisReveal() {
   const labelY = useTransform(scrollYProgress, [0, 0.12], [20, 0]);
 
   return (
-    <section ref={ref} className="bg-[#0d0d0d] py-32 md:py-44 px-6 md:px-20">
+    <section ref={ref} className="relative bg-[#0d0d0d] py-32 md:py-44 px-6 md:px-20">
       <div className="max-w-4xl mx-auto">
         {/* Section label */}
         <motion.p
