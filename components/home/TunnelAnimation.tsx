@@ -52,9 +52,11 @@ const FRAG = `
     vec2 res = uRes / uRes.y;
     vec2 uv  = gl_FragCoord.xy / uRes.y - res * 0.5;
 
-    // Anchor the tunnel center toward the upper-right of the hero
-    uv.x -= 0.20;
-    uv.y += 0.06;
+    // Anchor the tunnel center in the top-right quadrant of the hero.
+    // Negative x shifts the apparent center rightward on screen;
+    // positive y shifts it upward.
+    uv.x -= 0.38;
+    uv.y += 0.22;
 
     float repAngle = TAU / float(RING_PTS);
     float ptSize   = PT_SIZE * 0.5 / uRes.y;
@@ -220,12 +222,15 @@ export default function TunnelAnimation() {
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{
-        // Fade the tunnel out as it approaches the left (text) side.
-        // The gradient is written in mask-space (opaque = show, transparent = hide).
+        // Sit above the gradient overlay divs in HeroSection (z-10 = text content)
+        zIndex: 2,
+        // Diagonal fade: fully visible in the top-right corner, dissolves toward
+        // the bottom-left where the headline and body copy live.
+        // mask-space: black = show canvas, transparent = hide canvas.
         maskImage:
-          "linear-gradient(to left, black 15%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.15) 70%, transparent 90%)",
+          "linear-gradient(to top right, transparent 10%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.75) 62%, black 80%)",
         WebkitMaskImage:
-          "linear-gradient(to left, black 15%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.15) 70%, transparent 90%)",
+          "linear-gradient(to top right, transparent 10%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.75) 62%, black 80%)",
       }}
     />
   );
